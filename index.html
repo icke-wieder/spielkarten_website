@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eintragung</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- ==============================
+             HIER KANNST DU SPÄTER ÄNDERN
+             ============================== -->
+
+        <img id="mainImage" src="mein_bild.png" alt="Bild">
+
+        <p id="introText"></p>
+
+        <!-- ============================== -->
+
+        <form id="form">
+
+            <label for="name">Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Dein Name"
+                required
+            >
+
+            <label for="amount">Anzahl</label>
+            <select id="amount" name="amount" required>
+                <option value="" disabled selected>
+                    Bitte auswählen
+                </option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="5+">5+</option>
+            </select>
+
+            <button type="submit">
+                Eintragen
+            </button>
+
+        </form>
+
+        <div id="message"></div>
+
+    </main>
+
+    <script>
+
+        // ========================================
+        // DEINE EINSTELLUNGEN
+        // ========================================
+
+        const image = "mein_bild.png";
+        const text = "";
+
+        const scriptURL =
+            "https://script.google.com/macros/s/AKfycbyBmYXcE37LlEs5VxtjBWGpOojbPlZeKpjEmsFAb3wwdGkOe0FCTKHF9QVW_61pYrnP/exec";
+
+
+        // ========================================
+        // EINSTELLUNGEN ANWENDEN
+        // ========================================
+
+        document.getElementById("mainImage").src = image;
+        document.getElementById("introText").textContent = text;
+
+
+        // ========================================
+        // FORMULAR ABSENDEN
+        // ========================================
+
+        const form = document.getElementById("form");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const amount = document.getElementById("amount").value;
+
+            message.textContent = "Wird eingetragen ...";
+            message.className = "loading";
+
+            try {
+
+                const formData = new URLSearchParams();
+
+                formData.append("name", name);
+                formData.append("amount", amount);
+
+                await fetch(scriptURL, {
+                    method: "POST",
+                    body: formData,
+                    mode: "no-cors"
+                });
+
+                form.reset();
+
+                message.textContent =
+                    "Danke! Deine Antwort wurde eingetragen. ❤️";
+
+                message.className = "success";
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Leider ist etwas schiefgegangen. Bitte versuche es noch einmal.";
+
+                message.className = "error";
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+
