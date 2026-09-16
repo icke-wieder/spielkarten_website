@@ -1,31 +1,98 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Eintragung</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
     <main class="container">
 
-        <!-- ==============================
-             HIER KANNST DU SPÄTER ÄNDERN
-             ============================== -->
 
-        <img id="mainImage" src="preview.png" alt="Bild">
+        <!-- =====================================
+             DEINE EINSTELLUNGEN
+             ===================================== -->
 
-        <p id="introText"></p>
+        <img
+            id="mainImage"
+            src="preview.png"
+            alt="Bild"
+        >
 
-        <!-- ============================== -->
+        <p id="explanation"></p>
+
+
+        <!-- =====================================
+             FORTSCHRITTSBALKEN
+             ===================================== -->
+
+        <section class="progress-section">
+
+            <div class="progress-info">
+
+                <span>
+                    Aktuelle Anzahl:
+                </span>
+
+                <strong id="totalAmount">
+                    ...
+                </strong>
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div
+                    id="progressBar"
+                    class="progress-bar"
+                ></div>
+
+                <div class="minimum-line">
+
+                    <span>
+                        minimale Anzahl 50
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-max">
+                50
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             FORMULAR
+             ===================================== -->
 
         <form id="form">
 
-            <label for="name">Name</label>
+
+            <label for="name">
+                Name
+            </label>
+
             <input
                 type="text"
                 id="name"
@@ -34,18 +101,64 @@
                 required
             >
 
-            <label for="amount">Anzahl</label>
-            <select id="amount" name="amount" required>
-                <option value="" disabled selected>
+
+            <label for="email">
+                Mailadresse
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="deine@email.de"
+                required
+            >
+
+
+            <label for="amount">
+                Anzahl
+            </label>
+
+            <select
+                id="amount"
+                name="amount"
+                required
+            >
+
+                <option
+                    value=""
+                    disabled
+                    selected
+                >
                     Bitte auswählen
                 </option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="5+">5+</option>
+
+                <option value="1">
+                    1
+                </option>
+
+                <option value="2">
+                    2
+                </option>
+
+                <option value="3">
+                    3
+                </option>
+
+                <option value="4">
+                    4
+                </option>
+
+                <option value="5">
+                    5
+                </option>
+
+                <option value="5+">
+                    5+
+                </option>
+
             </select>
+
 
             <button type="submit">
                 Eintragen
@@ -53,21 +166,42 @@
 
         </form>
 
+
         <div id="message"></div>
+
+
+        <!-- =====================================
+             WEITERE BILDER
+             ===================================== -->
+
+        <section
+            id="moreImages"
+            class="more-images"
+        ></section>
+
 
     </main>
 
+
     <script>
+
 
         // ========================================
         // DEINE EINSTELLUNGEN
         // ========================================
 
         const image = "preview.png";
-        const text = "";
+
+        const text = "~ Erklärung was genau ich hier eigentlich mache ~";
+
 
         const scriptURL =
             "https://script.google.com/macros/s/AKfycbyBmYXcE37LlEs5VxtjBWGpOojbPlZeKpjEmsFAb3wwdGkOe0FCTKHF9QVW_61pYrnP/exec";
+
+
+        // Deine GitHub-Daten
+        const githubUser = "icke-wieder";
+        const githubRepo = "spielkarten_website";
 
 
         // ========================================
@@ -75,60 +209,250 @@
         // ========================================
 
         document.getElementById("mainImage").src = image;
-        document.getElementById("introText").textContent = text;
+
+        document.getElementById("explanation").textContent = text;
 
 
         // ========================================
-        // FORMULAR ABSENDEN
+        // FORTSCHRITT LADEN
         // ========================================
 
-        const form = document.getElementById("form");
-        const message = document.getElementById("message");
-
-        form.addEventListener("submit", async function(event) {
-
-            event.preventDefault();
-
-            const name = document.getElementById("name").value;
-            const amount = document.getElementById("amount").value;
-
-            message.textContent = "Wird eingetragen ...";
-            message.className = "loading";
+        async function loadProgress() {
 
             try {
 
-                const formData = new URLSearchParams();
+                const response =
+                    await fetch(scriptURL);
 
-                formData.append("name", name);
-                formData.append("amount", amount);
+                const data =
+                    await response.json();
 
-                await fetch(scriptURL, {
-                    method: "POST",
-                    body: formData,
-                    mode: "no-cors"
-                });
+                const total =
+                    Number(data.total) || 0;
 
-                form.reset();
 
-                message.textContent =
-                    "Danke! Deine Antwort wurde eingetragen. ❤️";
+                document.getElementById(
+                    "totalAmount"
+                ).textContent = total;
 
-                message.className = "success";
+
+                // 50 ist das Ziel für 100 %
+                // Alles darüber bleibt bei 100 %
+
+                const percentage =
+                    Math.min((total / 50) * 100, 100);
+
+
+                document.getElementById(
+                    "progressBar"
+                ).style.width =
+                    percentage + "%";
+
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Fehler beim Laden des Fortschritts:",
+                    error
+                );
 
-                message.textContent =
-                    "Leider ist etwas schiefgegangen. Bitte versuche es noch einmal.";
+                document.getElementById(
+                    "totalAmount"
+                ).textContent = "?";
 
-                message.className = "error";
             }
 
-        });
+        }
+
+
+        // Beim Laden der Seite
+        loadProgress();
+
+
+        // ========================================
+        // FORMULAR
+        // ========================================
+
+        const form =
+            document.getElementById("form");
+
+        const message =
+            document.getElementById("message");
+
+
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document.getElementById(
+                        "name"
+                    ).value;
+
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    ).value;
+
+
+                const amount =
+                    document.getElementById(
+                        "amount"
+                    ).value;
+
+
+                message.textContent =
+                    "Wird eingetragen ...";
+
+                message.className =
+                    "loading";
+
+
+                try {
+
+                    const formData =
+                        new URLSearchParams();
+
+
+                    formData.append(
+                        "name",
+                        name
+                    );
+
+
+                    formData.append(
+                        "email",
+                        email
+                    );
+
+
+                    formData.append(
+                        "amount",
+                        amount
+                    );
+
+
+                    await fetch(
+                        scriptURL,
+                        {
+                            method: "POST",
+                            body: formData,
+                            mode: "no-cors"
+                        }
+                    );
+
+
+                    form.reset();
+
+
+                    message.textContent =
+                        "Danke! Deine Antwort wurde eingetragen. ❤️";
+
+                    message.className =
+                        "success";
+
+
+                    // Fortschrittsbalken aktualisieren
+                    loadProgress();
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+
+                    message.textContent =
+                        "Leider ist etwas schiefgegangen. Bitte versuche es noch einmal.";
+
+                    message.className =
+                        "error";
+
+                }
+
+            }
+        );
+
+
+        // ========================================
+        // BILDER AUS more_img/ LADEN
+        // ========================================
+
+        async function loadMoreImages() {
+
+            const container =
+                document.getElementById(
+                    "moreImages"
+                );
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/more_img`
+                    );
+
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Ordner konnte nicht geladen werden."
+                    );
+                }
+
+
+                const files =
+                    await response.json();
+
+
+                files
+                    .filter(file =>
+                        file.type === "file" &&
+                        /\.(png|jpg|jpeg|gif|webp)$/i.test(file.name)
+                    )
+                    .forEach(file => {
+
+                        const img =
+                            document.createElement(
+                                "img"
+                            );
+
+
+                        img.src =
+                            file.download_url;
+
+
+                        img.alt =
+                            file.name;
+
+
+                        container.appendChild(
+                            img
+                        );
+
+                    });
+
+
+            } catch (error) {
+
+                console.error(
+                    "Fehler beim Laden der Bilder:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        loadMoreImages();
+
 
     </script>
 
 </body>
-</html>
 
+</html>
