@@ -114,6 +114,69 @@ body {
     overflow: visible;
 }
 
+/* ========================================
+   MARKIERUNG BEI 50
+   ======================================== */
+
+.minimum-line {
+    position: absolute;
+
+    right: 0;
+    top: -8px;
+
+    width: 2px;
+    height: 40px;
+
+    background: #333;
+
+    border-radius: 2px;
+}
+
+
+/* Beschriftung */
+
+.minimum-line span {
+    position: absolute;
+
+    right: 0;
+    bottom: calc(100% + 10px);
+
+    transform: translateX(50%);
+
+    white-space: nowrap;
+
+    padding: 5px 9px;
+
+    background: #333;
+    color: white;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    line-height: 1;
+}
+
+
+/* kleines Dreieck */
+
+.minimum-line span::after {
+    content: "";
+
+    position: absolute;
+
+    right: 50%;
+    bottom: -5px;
+
+    transform: translateX(50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+}
 
 /* Fortschritt */
 
@@ -130,147 +193,6 @@ body {
 }
 
 
-/* ========================================
-   MARKIERUNG BEI 50
-   ======================================== */
-
-.minimum-line {
-    position: absolute;
-
-    right: 0;
-    top: -8px;
-
-    height: 40px;
-    width: 2px;
-
-    background: #333;
-
-    border-radius: 2px;
-}
-
-
-/* Beschriftung */
-
-.minimum-line span {
-    position: absolute;
-
-    right: -1px;
-    bottom: calc(100% + 8px);
-
-    transform: translateX(0);
-
-    white-space: nowrap;
-
-    padding: 5px 8px;
-
-    background: #333;
-    color: white;
-
-    border-radius: 6px;
-
-    font-size: 12px;
-
-    line-height: 1;
-}
-
-
-/* Kleines Dreieck */
-
-.minimum-line span::after {
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    bottom: -5px;
-
-    width: 0;
-    height: 0;
-
-    border-top: 5px solid #333;
-    border-left: 5px solid transparent;
-}
-
-/* ========================================
-   MINDESTANZAHL - MARKIERUNG
-   ======================================== */
-
-.minimum-line {
-    position: absolute;
-
-    left: 100%;
-    top: -12px;
-
-    height: 48px;
-    width: 2px;
-
-    background: #333;
-
-    border-radius: 2px;
-}
-
-
-/* Beschriftung über der Linie */
-
-.minimum-line span {
-    position: absolute;
-
-    right: -1px;
-    bottom: 100%;
-
-    margin-bottom: 7px;
-
-    transform: translateX(0);
-
-    white-space: nowrap;
-
-    padding: 5px 9px;
-
-    background: #333;
-    color: white;
-
-    border-radius: 6px;
-
-    font-size: 12px;
-
-    line-height: 1;
-
-}
-
-
-/* Kleines Dreieck unter der Beschriftung */
-
-.minimum-line span::after {
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-
-    bottom: -5px;
-
-    width: 0;
-    height: 0;
-
-    border-left: 5px solid transparent;
-    border-right: 0 solid transparent;
-    border-top: 5px solid #333;
-}
-
-
-/* 50 unter dem Balken */
-
-.progress-max {
-    text-align: right;
-
-    margin-top: 8px;
-
-    padding-right: 0;
-
-    font-size: 13px;
-
-    color: #666;
-}
 
 
 /* ========================================
