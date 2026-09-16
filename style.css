@@ -79,40 +79,45 @@ body {
    ======================================== */
 
 .progress-section {
-
-    margin-bottom: 30px;
-
+    margin: 35px 0 40px;
 }
 
+
+/* Text über dem Balken */
 
 .progress-info {
-
     display: flex;
-
     justify-content: space-between;
+    align-items: baseline;
 
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
+    font-size: 16px;
+}
+
+.progress-info strong {
+    font-size: 18px;
 }
 
 
-.progress-container {
+/* Balken */
 
+.progress-container {
     position: relative;
 
-    height: 25px;
+    height: 24px;
 
     background: #e5e5e5;
 
     border-radius: 20px;
 
     overflow: visible;
-
 }
 
 
-.progress-bar {
+/* Fortschritt */
 
+.progress-bar {
     height: 100%;
 
     width: 0%;
@@ -122,54 +127,88 @@ body {
     border-radius: 20px;
 
     transition: width 0.5s ease;
-
 }
 
 
-/* Linie bei 50 */
+/* ========================================
+   MINDESTANZAHL - MARKIERUNG
+   ======================================== */
 
 .minimum-line {
-
     position: absolute;
 
     left: 100%;
+    top: -12px;
 
-    top: -10px;
-
-    height: 45px;
-
+    height: 48px;
     width: 2px;
 
     background: #333;
 
+    border-radius: 2px;
 }
 
 
-.minimum-line span {
+/* Beschriftung über der Linie */
 
+.minimum-line span {
     position: absolute;
 
-    left: 50%;
+    right: -1px;
+    bottom: 100%;
 
-    top: -28px;
+    margin-bottom: 7px;
 
-    transform: translateX(-50%);
+    transform: translateX(0);
 
     white-space: nowrap;
 
-    font-size: 13px;
+    padding: 5px 9px;
+
+    background: #333;
+    color: white;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    line-height: 1;
 
 }
 
 
-.progress-max {
+/* Kleines Dreieck unter der Beschriftung */
 
+.minimum-line span::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: -5px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 5px solid transparent;
+    border-right: 0 solid transparent;
+    border-top: 5px solid #333;
+}
+
+
+/* 50 unter dem Balken */
+
+.progress-max {
     text-align: right;
 
-    margin-top: 5px;
+    margin-top: 8px;
+
+    padding-right: 0;
 
     font-size: 13px;
 
+    color: #666;
 }
 
 
