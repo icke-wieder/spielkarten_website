@@ -79,16 +79,16 @@ body {
    ======================================== */
 
 .progress-section {
-    margin: 35px 0 40px;
+    margin: 35px 0 45px;
 }
 
 
-/* Text über dem Balken */
+/* Kopfzeile */
 
 .progress-info {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
 
     margin-bottom: 12px;
 
@@ -96,11 +96,11 @@ body {
 }
 
 .progress-info strong {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 
-/* Balken */
+/* Der eigentliche Balken */
 
 .progress-container {
     position: relative;
@@ -129,6 +129,67 @@ body {
     transition: width 0.5s ease;
 }
 
+
+/* ========================================
+   MARKIERUNG BEI 50
+   ======================================== */
+
+.minimum-line {
+    position: absolute;
+
+    right: 0;
+    top: -8px;
+
+    height: 40px;
+    width: 2px;
+
+    background: #333;
+
+    border-radius: 2px;
+}
+
+
+/* Beschriftung */
+
+.minimum-line span {
+    position: absolute;
+
+    right: -1px;
+    bottom: calc(100% + 8px);
+
+    transform: translateX(0);
+
+    white-space: nowrap;
+
+    padding: 5px 8px;
+
+    background: #333;
+    color: white;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    line-height: 1;
+}
+
+
+/* Kleines Dreieck */
+
+.minimum-line span::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: -5px;
+
+    width: 0;
+    height: 0;
+
+    border-top: 5px solid #333;
+    border-left: 5px solid transparent;
+}
 
 /* ========================================
    MINDESTANZAHL - MARKIERUNG
