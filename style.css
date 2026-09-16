@@ -1,23 +1,30 @@
-```css
 * {
     box-sizing: border-box;
 }
 
+
 body {
+
     margin: 0;
+
     min-height: 100vh;
 
     font-family: Arial, sans-serif;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     background: #f5f5f5;
+
 }
 
+
 .container {
-    width: min(90%, 500px);
+
+    width: min(90%, 600px);
 
     background: white;
 
@@ -25,46 +32,177 @@ body {
 
     border-radius: 15px;
 
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.1);
 
     text-align: center;
+
 }
 
+
+/* ========================================
+   HAUPTBILD
+   ======================================== */
+
 #mainImage {
+
     display: block;
 
     width: 100%;
+
     max-height: 500px;
 
     object-fit: contain;
 
     margin: 0 auto 25px;
+
 }
 
-#introText {
-    margin-bottom: 25px;
+
+/* ========================================
+   ERKLÄRUNG
+   ======================================== */
+
+#explanation {
+
+    margin-bottom: 30px;
 
     font-size: 18px;
+
+    line-height: 1.5;
+
 }
 
-form {
+
+/* ========================================
+   FORTSCHRITTSBALKEN
+   ======================================== */
+
+.progress-section {
+
+    margin-bottom: 30px;
+
+}
+
+
+.progress-info {
+
     display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+}
+
+
+.progress-container {
+
+    position: relative;
+
+    height: 25px;
+
+    background: #e5e5e5;
+
+    border-radius: 20px;
+
+    overflow: visible;
+
+}
+
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: #333;
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+
+}
+
+
+/* Linie bei 50 */
+
+.minimum-line {
+
+    position: absolute;
+
+    left: 100%;
+
+    top: -10px;
+
+    height: 45px;
+
+    width: 2px;
+
+    background: #333;
+
+}
+
+
+.minimum-line span {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: -28px;
+
+    transform: translateX(-50%);
+
+    white-space: nowrap;
+
+    font-size: 13px;
+
+}
+
+
+.progress-max {
+
+    text-align: right;
+
+    margin-top: 5px;
+
+    font-size: 13px;
+
+}
+
+
+/* ========================================
+   FORMULAR
+   ======================================== */
+
+form {
+
+    display: flex;
+
     flex-direction: column;
 
     gap: 10px;
 
     text-align: left;
+
 }
 
+
 label {
+
     font-weight: bold;
 
     margin-top: 10px;
+
 }
+
 
 input,
 select,
 button {
+
     width: 100%;
 
     padding: 12px;
@@ -72,45 +210,101 @@ button {
     font-size: 16px;
 
     border-radius: 8px;
+
 }
+
 
 input,
 select {
+
     border: 1px solid #ccc;
 
     background: white;
+
 }
 
+
 button {
+
     margin-top: 15px;
 
     border: none;
 
     background: #333;
+
     color: white;
 
     cursor: pointer;
+
 }
+
 
 button:hover {
+
     background: #555;
+
 }
 
+
+/* ========================================
+   MELDUNG
+   ======================================== */
+
 #message {
+
     margin-top: 20px;
 
     font-size: 16px;
+
 }
+
 
 .success {
+
     color: green;
+
 }
+
 
 .error {
+
     color: red;
+
 }
 
+
 .loading {
+
     color: #666;
+
 }
-```
+
+
+/* ========================================
+   WEITERE BILDER
+   ======================================== */
+
+.more-images {
+
+    margin-top: 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+.more-images img {
+
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+
+    border-radius: 10px;
+
+}
